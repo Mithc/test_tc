@@ -12,8 +12,33 @@ code {
         monospace;
 }
 
+@keyframes rainbow {
+    0% {
+        color: red;
+    }
+    17% {
+        color: orange;
+    }
+    34% {
+        color: yellow;
+    }
+    51% {
+        color: #00ff0a;
+    }
+    68% {
+        color: #008cff;
+    }
+    85% {
+        color: #9400ff;
+    }
+    100% {
+        color: #ff8eff;
+    }
+}
+
+/* Apply animation to text */
 .red {
-    background-color: red;
+    animation: rainbow 4s linear infinite;
 }
 
 .bold {

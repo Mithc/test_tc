@@ -17,7 +17,6 @@ const TextEllipsisWrapper: (
 ) => {
     return (
         <TextEllipsis
-            // eslint-disable-next-line react/no-children-prop
             children={cellData.value}
             tailLength={cellData.tailLength}
             className={cellData.className}
@@ -29,12 +28,13 @@ const Table: React.FC<{ rowData: Build[] }> = ({ rowData }) => {
     const [gridApi, setGridApi] = useState<GridApi | null>(null)
 
     useEffect(() => {
-        // Add a resize listener to the table container element
         const onResize = () => {
             if (gridApi) {
                 gridApi.sizeColumnsToFit()
             }
         }
+        onResize()
+
         window.addEventListener('resize', onResize)
         return () => {
             window.removeEventListener('resize', onResize)
@@ -53,10 +53,11 @@ const Table: React.FC<{ rowData: Build[] }> = ({ rowData }) => {
                 tailLength: 9,
                 className: 'bold',
             },
+            enableCellTextSelection: true,
             resizable: true,
         },
-        { field: 'buildNumber', width: 200, resizable: true },
-        { field: 'status', width: 200, resizable: true },
+        { field: 'buildNumber', resizable: true },
+        { field: 'status', resizable: true },
         {
             field: 'userName',
             cellRenderer: TextEllipsisWrapper,
@@ -64,22 +65,22 @@ const Table: React.FC<{ rowData: Build[] }> = ({ rowData }) => {
                 tailLength: 2,
                 className: 'red',
             },
-            width: 200,
             resizable: true,
         },
-        { field: 'date', width: 200, resizable: true },
+        { field: 'date', resizable: true },
     ]
 
     return (
         <div
             className="ag-theme-alpine"
-            style={{ height: 1000, width: 'auto' }}
+            style={{ height: 1000, width: '100%' }}
         >
             <AgGridReact
                 rowData={rowData}
                 columnDefs={columnDefs}
                 onGridReady={onGridReady}
                 defaultColDef={{ resizable: true }}
+                enableCellTextSelection={true}
             ></AgGridReact>
         </div>
     )
