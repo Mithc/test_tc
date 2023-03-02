@@ -73,7 +73,7 @@ const Table: React.FC<{ rowData: Build[] }> = ({ rowData }) => {
     return (
         <div
             className="ag-theme-alpine"
-            style={{ height: 1000, width: '100%' }}
+            style={{ height: '100vh', width: '100%' }}
         >
             <AgGridReact
                 rowData={rowData}
@@ -81,6 +81,8 @@ const Table: React.FC<{ rowData: Build[] }> = ({ rowData }) => {
                 onGridReady={onGridReady}
                 defaultColDef={{ resizable: true }}
                 enableCellTextSelection={true}
+                domLayout={'normal'}
+                rowBuffer={2000}
             ></AgGridReact>
         </div>
     )

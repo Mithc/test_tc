@@ -7,11 +7,6 @@ interface TextEllipsisProp {
     className?: string
 }
 
-
-// TODO:
-// -Now copying add /n between two spans values;
-// -search works, but looks bad;
-
 const TextEllipsis = ({
     children,
     tailLength,
@@ -28,39 +23,39 @@ const TextEllipsis = ({
     )
 
     return (
-        <div
-            className={`${className} searchable`}
-            title={title}
-            style={{ display: 'flex' }}
-            data-search-target={children}
-        >
+        <div style={{ margin: '0 10px' }} className={className}>
             <span
-                style={{
-                    textOverflow: 'ellipsis',
-                    overflow: 'hidden',
-                    whiteSpace: 'nowrap',
-                }}
-                className={'start'}
-            >
-                {start}
-            </span>
-            <span className={'tail'}>{tail}</span>
-            <div
                 className="searchable"
                 style={{
-                    width: '100%',
-                    opacity: '0',
-                    overflow: 'hidden',
-                    display: 'inline-block',
                     position: 'absolute',
-                    color: 'transparent',
-                    bottom: 0,
-                    zIndex: -1,
-                    left: 0,
+                    display: 'block',
+                    pointerEvents: 'none',
+                    color: 'rgba(0,0,0,0)',
+                    maxWidth: '90%',
+                    overflow: 'hidden',
                 }}
             >
                 {children}
-            </div>
+            </span>
+            <span
+                title={title}
+                style={{
+                    display: 'inline-flex',
+                    maxWidth: '100%',
+                }}
+            >
+                <span
+                    style={{
+                        textOverflow: 'ellipsis',
+                        overflow: 'hidden',
+                        whiteSpace: 'nowrap',
+                    }}
+                    className={'start'}
+                >
+                    {start}
+                </span>
+                <span className={'tail'}>{tail}</span>
+            </span>
         </div>
     )
 }
